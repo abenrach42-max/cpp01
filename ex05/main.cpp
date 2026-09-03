@@ -19,8 +19,14 @@ int main(void)
 
     while (1)
     {
-        std::cout << "Enter a command (DEBUG, INFO, WARNING, ERROR : ";
+        std::cout << "Enter a command (DEBUG, INFO, WARNING, ERROR) : ";
         std::cin >> line;
+        if (std::cin.eof())
+        {
+            std::cout << std::endl;
+            std::cout << "You exit your program" << std::endl;
+            return (1);
+        }
         harl.complain(line);
     }
     return (0);

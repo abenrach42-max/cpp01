@@ -1,4 +1,4 @@
-NAME = war_human
+NAME = Half
 
 CC = c++
 
@@ -11,6 +11,9 @@ OBJS = $(SRCS:.cpp=.o)
 
 $(NAME): $(OBJS)
 	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
+
+%.o: %.cpp
+	$(CC) $(FLAGS) -c $< -o $@
 
 all: $(NAME)
 
