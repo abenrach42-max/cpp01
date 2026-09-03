@@ -40,25 +40,16 @@ int main(int ac, char **av)
     {
         if (!first_line)
             result += '\n';
-        first_line = 0;
         std::size_t pos = 0;
-        std::size_t before_pos = 0;
-        while ((pos = line.find(s1, pos)) != std::string::npos)
+        std::size_t prev = 0;
+        first_line = 0;
+        while ((pos = line.find(s1, prev)) != std::string::npos)
         {
-            while (before_pos < pos)
-            {
-                result += line[before_pos];
-                before_pos++;
-            }
-            pos += s1.length();
-            result += s2;
-            before_pos = pos;
+            result.append(line, prev, pos - prev);
+            result.append(s2);
+            prev = pos + s1.length();
         }
-        while (before_pos < line.length())
-        {
-            result += line[before_pos];
-            before_pos++;
-        }
+        result.append(line, prev, std::string::npos);
     }
     std::string file_replace = filename + ".replace";
     std::ofstream file_write(file_replace.c_str());
